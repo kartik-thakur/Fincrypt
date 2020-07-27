@@ -28,7 +28,7 @@ libs:
 fincrypt:
 	$(MKDIR) $(OUT_DIR)
 	$(CXX) $(CFLAGS) $(INC) $(LIBS) \
-		-lcryptopp $(SOURCE_DIR)/Fincrypt.cpp \
+		-lcryptopp $(SOURCE_DIR)/fincrypt.cpp \
 		-o $(OUT_DIR)/$(OUT_FINCRYPT)
 
 all:
