@@ -16,9 +16,9 @@ namespace HASH_ALGORITHM {
 		MD2,
 		MD4,
 		MD5,
+		RIPEMD128,
 		RIPEMD160,
 		RIPEMD320,
-		RIPEMD128,
 		RIPEMD256,
 		SHA1,
 		SHA224,
@@ -35,22 +35,15 @@ namespace HASH_ALGORITHM {
 	class HashAlgorithm {
 	public:
 		HashAlgorithm(unsigned int);
-		~HashAlgorithm();
-		int generate(std::string, std::string);
+		int generate(std::string, std::string &, bool);
 	private:
+		typedef int (*HashGenerator)(std::string, std::string &, bool);
+
 		unsigned int	algorithm;
-		union {
-			CryptoPP::SHA1		sha1;
-			CryptoPP::SHA224	sha224;
-			CryptoPP::SHA256	sha256;
-			CryptoPP::SHA384	sha384;
-			CryptoPP::SHA512	sha512;
-		};
+		bool		valid();
+		HashGenerator	implementations[NUM_HASH_ALGORITHMS];
 
-		bool valid();
-
-		typedef int (*HashGenerator)(std::string, std::string);
-		HashGenerator implementations[NUM_HASH_ALGORITHMS];
+		void initializeImplementations();
 	};
 }
 #endif
